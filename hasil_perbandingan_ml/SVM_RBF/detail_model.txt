@@ -1,0 +1,7 @@
+Nama Model: SVM (RBF)
+Akurasi: 0.982107
+Presisi (Weighted): 0.982129
+Recall (Weighted): 0.982107
+F1-Score (Weighted): 0.982107
+Waktu Training: 24.71 detik
+Hyperparameter Terbaik: {'C': 10, 'gamma': 'scale'}

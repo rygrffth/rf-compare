@@ -1,0 +1,7 @@
+Nama Model: Decision Tree
+Akurasi: 0.921320
+Presisi (Weighted): 0.933012
+Recall (Weighted): 0.921320
+F1-Score (Weighted): 0.919931
+Waktu Training: 11.36 detik
+Hyperparameter Terbaik: {'criterion': 'gini', 'max_depth': 10, 'min_samples_leaf': 2}

@@ -1,0 +1,7 @@
+Nama Model: SVM (Linear)
+Akurasi: 0.898477
+Presisi (Weighted): 0.922256
+Recall (Weighted): 0.898477
+F1-Score (Weighted): 0.893767
+Waktu Training: 1.22 detik
+Hyperparameter Terbaik: {'C': 1.0}
