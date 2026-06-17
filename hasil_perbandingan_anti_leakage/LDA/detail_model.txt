@@ -1,7 +1,7 @@
 Nama Model: LDA
-Akurasi: 0.925973
-Presisi (Weighted): 0.931742
-Recall (Weighted): 0.925973
-F1-Score (Weighted): 0.923526
-Waktu Training: 0.03 detik
+Akurasi: 0.916388
+Presisi (Weighted): 0.923425
+Recall (Weighted): 0.916388
+F1-Score (Weighted): 0.913769
+Waktu Training: 0.01 detik
 Model dilatih menggunakan parameter default.

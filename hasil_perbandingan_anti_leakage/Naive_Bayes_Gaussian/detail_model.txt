@@ -1,7 +1,7 @@
 Nama Model: Naive Bayes (Gaussian)
-Akurasi: 0.873942
-Presisi (Weighted): 0.912413
-Recall (Weighted): 0.873942
-F1-Score (Weighted): 0.864967
+Akurasi: 0.874582
+Presisi (Weighted): 0.912749
+Recall (Weighted): 0.874582
+F1-Score (Weighted): 0.865745
 Waktu Training: 0.01 detik
 Model dilatih menggunakan parameter default.

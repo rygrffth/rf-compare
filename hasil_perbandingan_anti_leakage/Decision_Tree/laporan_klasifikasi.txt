@@ -1,10 +1,10 @@
                     precision    recall  f1-score   support
 
-       Off Contact       0.98      1.00      0.99       591
-            Normal       0.98      0.98      0.98       591
-Inisiasi Busur Api       0.79      0.98      0.87       591
- Busur Api Konstan       0.98      0.73      0.83       591
+       Off Contact       0.98      1.00      0.99       598
+            Normal       0.98      1.00      0.99       598
+Inisiasi Busur Api       0.68      0.99      0.80       598
+ Busur Api Konstan       1.00      0.50      0.66       598
 
-          accuracy                           0.92      2364
-         macro avg       0.93      0.92      0.92      2364
-      weighted avg       0.93      0.92      0.92      2364
+          accuracy                           0.87      2392
+         macro avg       0.91      0.87      0.86      2392
+      weighted avg       0.91      0.87      0.86      2392

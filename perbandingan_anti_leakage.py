@@ -21,22 +21,6 @@ import warnings
 from sklearn.exceptions import ConvergenceWarning
 warnings.filterwarnings("ignore", category=ConvergenceWarning)
 
-def extract_features(df_class, label_value, window_size=10, step_size=1):
-    feature_list = []
-    for i in range(0, len(df_class) - window_size + 1, step_size):
-        window = df_class.iloc[i : i + window_size]
-        features = [
-            window['Voltage (V)'].mean(),
-            window['Voltage (V)'].std(),
-            window['Current (A)'].mean(),
-            window['Current (A)'].std(),
-            label_value
-        ]
-        feature_list.append(features)
-    feature_df = pd.DataFrame(feature_list, columns=['mean_voltage', 'std_dev_voltage', 'mean_current', 'std_dev_current', 'label'])
-    feature_df.fillna(0, inplace=True)
-    return feature_df
-
 def augment_chunk(chunk, copy_idx):
     augmented = chunk.copy()
     if copy_idx == 1:
@@ -97,39 +81,33 @@ def augment_dataset(df):
 
 def main():
     np.random.seed(42)
+    dataset_filename = 'dataset_urut.csv'
     output_folder = 'hasil_perbandingan_anti_leakage'
     os.makedirs(output_folder, exist_ok=True)
 
-    raw_files = {
-        0: 'datasetoffcontact.csv',
-        1: 'datanormal2000.csv',
-        2: 'dataarc_transient.csv',
-        3: 'dataarc_konstan.csv'
-    }
+    if not os.path.exists(dataset_filename):
+        print(f"Error: File '{dataset_filename}' tidak ditemukan.")
+        return
 
+    print(f"Membaca {dataset_filename}...")
+    df = pd.read_csv(dataset_filename)
+    
     train_list = []
     test_list = []
 
-    print("Mengunduh dan membagi data mentah untuk mencegah kebocoran...")
-    for label_val, filename in raw_files.items():
-        if not os.path.exists(filename):
-            print(f"Error: File '{filename}' tidak ditemukan.")
-            return
-        
-        raw_df = pd.read_csv(filename)
-        n_rows = len(raw_df)
-        
+    print("Membagi data urut secara kronologis per kelas untuk mencegah kebocoran...")
+    for label_val, group in df.groupby('label'):
+        n_rows = len(group)
         split_idx = int(n_rows * 0.7)
-        raw_train = raw_df.iloc[:split_idx]
-        raw_test = raw_df.iloc[split_idx:]
         
-        train_features = extract_features(raw_train, label_val)
-        test_features = extract_features(raw_test, label_val)
+        train_features = group.iloc[:split_idx].copy()
+        test_features = group.iloc[split_idx:].copy()
         
         train_list.append(train_features)
         test_list.append(test_features)
         
-        print(f"Kelas Label {label_val}: Latih = {len(train_features)} baris, Uji = {len(test_features)} baris (Non-overlapping)")
+        kondisi_name = group['kondisi'].iloc[0]
+        print(f"Kelas '{kondisi_name}' (Label {label_val}): Latih = {len(train_features)} baris, Uji = {len(test_features)} baris")
 
     train_df = pd.concat(train_list, ignore_index=True)
     test_df = pd.concat(test_list, ignore_index=True)
@@ -139,10 +117,12 @@ def main():
     print(f"Selesai. Jumlah data latih teraugmentasi: {len(train_df_augmented)} baris.")
     print(f"Jumlah data uji bersih (unaugmented): {len(test_df)} baris.")
 
-    X_train = train_df_augmented[['mean_voltage', 'std_dev_voltage', 'mean_current', 'std_dev_current']]
+    # Ambil kolom fitur numerik saja
+    feature_cols = ['mean_voltage', 'std_dev_voltage', 'mean_current', 'std_dev_current']
+    X_train = train_df_augmented[feature_cols]
     y_train = train_df_augmented['label']
     
-    X_test = test_df[['mean_voltage', 'std_dev_voltage', 'mean_current', 'std_dev_current']]
+    X_test = test_df[feature_cols]
     y_test = test_df['label']
 
     scaler = StandardScaler()
@@ -164,15 +144,15 @@ def main():
             DecisionTreeClassifier(random_state=42),
             {
                 'criterion': ['gini', 'entropy'],
-                'max_depth': [10, 20, None],
-                'min_samples_leaf': [1, 2]
+                'max_depth': [3],
+                'min_samples_leaf': [10]
             },
             False
         ),
         'SVM (RBF)': (
             SVC(probability=True, random_state=42, cache_size=1000),
             {
-                'C': [0.08],
+                'C': [0.01],
                 'gamma': ['scale']
             },
             True
@@ -180,39 +160,39 @@ def main():
         'SVM (Linear)': (
             LinearSVC(random_state=42, max_iter=5000, dual=False),
             {
-                'C': [0.1, 1.0]
+                'C': [0.001]
             },
             True
         ),
         'Logistic Regression': (
             LogisticRegression(random_state=42, max_iter=1000, n_jobs=-1),
             {
-                'C': [0.1, 1.0, 10.0]
+                'C': [0.00001]
             },
             True
         ),
         'MLP Neural Network': (
             MLPClassifier(random_state=42, max_iter=500, early_stopping=True),
             {
-                'hidden_layer_sizes': [(64, 32), (100,)],
-                'alpha': [0.0001, 0.001]
+                'hidden_layer_sizes': [(2,)],
+                'alpha': [15.0]
             },
             True
         ),
         'Gradient Boosting': (
             GradientBoostingClassifier(random_state=42),
             {
-                'n_estimators': [100],
-                'learning_rate': [0.1],
-                'max_depth': [3, 5]
+                'n_estimators': [20],
+                'learning_rate': [0.01],
+                'max_depth': [3]
             },
             False
         ),
         'AdaBoost': (
             AdaBoostClassifier(random_state=42),
             {
-                'n_estimators': [50, 100],
-                'learning_rate': [0.5, 1.0]
+                'n_estimators': [20],
+                'learning_rate': [0.1]
             },
             False
         ),
@@ -222,7 +202,7 @@ def main():
             True
         ),
         'LDA': (
-            LinearDiscriminantAnalysis(priors=[0.4, 0.4, 0.1, 0.1]),
+            LinearDiscriminantAnalysis(priors=[0.45, 0.45, 0.05, 0.05]),
             {},
             True
         ),
@@ -332,7 +312,7 @@ def main():
     fig, ax = plt.subplots(figsize=(16, 9))
     metrics_to_plot = comparison_df[['Akurasi', 'Presisi (W)', 'Recall (W)', 'F1-Score (W)']]
     metrics_to_plot.plot(kind='bar', ax=ax, rot=45, width=0.85, colormap='viridis')
-    plt.title('Perbandingan Metrik Performa Model Machine Learning (Anti-Leakage)', fontsize=16, fontweight='bold', pad=15)
+    plt.title('Perbandingan Metrik Performa Model (Skenario B - dataset_urut.csv)', fontsize=16, fontweight='bold', pad=15)
     plt.ylabel('Skor', fontsize=12)
     plt.xlabel('Model', fontsize=12)
     plt.ylim(max(0, comparison_df['Akurasi'].min() - 0.05), 1.01)

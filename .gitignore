@@ -3,3 +3,5 @@ __pycache__/
 .DS_Store
 buat_dataset_urut.py
 buat_dataset_lengkap_dengan_timestamp.py
+perbandingan_anti_leakage_urut.py
+hasil_perbandingan_anti_leakage_urut/

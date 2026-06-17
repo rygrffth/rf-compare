@@ -1,7 +1,7 @@
 Nama Model: Logistic Regression
-Akurasi: 0.922589
-Presisi (Weighted): 0.936346
-Recall (Weighted): 0.922589
-F1-Score (Weighted): 0.919962
-Waktu Training: 1.57 detik
-Hyperparameter Terbaik: {'C': 0.1}
+Akurasi: 0.789716
+Presisi (Weighted): 0.850504
+Recall (Weighted): 0.789716
+F1-Score (Weighted): 0.736213
+Waktu Training: 0.26 detik
+Hyperparameter Terbaik: {'C': 1e-05}

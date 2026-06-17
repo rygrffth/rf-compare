@@ -1,7 +1,7 @@
 Nama Model: AdaBoost
-Akurasi: 0.873942
-Presisi (Weighted): 0.910523
-Recall (Weighted): 0.873942
-F1-Score (Weighted): 0.864747
-Waktu Training: 30.19 detik
-Hyperparameter Terbaik: {'learning_rate': 0.5, 'n_estimators': 50}
+Akurasi: 0.742893
+Presisi (Weighted): 0.614402
+Recall (Weighted): 0.742893
+F1-Score (Weighted): 0.659272
+Waktu Training: 1.47 detik
+Hyperparameter Terbaik: {'learning_rate': 0.1, 'n_estimators': 20}

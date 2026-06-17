@@ -1,7 +1,7 @@
 Nama Model: MLP Neural Network
-Akurasi: 0.923435
-Presisi (Weighted): 0.932549
-Recall (Weighted): 0.923435
-F1-Score (Weighted): 0.921485
-Waktu Training: 24.63 detik
-Hyperparameter Terbaik: {'alpha': 0.0001, 'hidden_layer_sizes': (64, 32)}
+Akurasi: 0.921823
+Presisi (Weighted): 0.932779
+Recall (Weighted): 0.921823
+F1-Score (Weighted): 0.918806
+Waktu Training: 7.28 detik
+Hyperparameter Terbaik: {'alpha': 15.0, 'hidden_layer_sizes': (2,)}
