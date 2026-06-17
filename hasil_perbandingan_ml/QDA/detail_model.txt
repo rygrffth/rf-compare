@@ -1,7 +1,7 @@
 Nama Model: QDA
-Akurasi: 0.979596
-Presisi (Weighted): 0.980129
-Recall (Weighted): 0.979596
-F1-Score (Weighted): 0.979584
-Waktu Training: 0.01 detik
+Akurasi: 0.922570
+Presisi (Weighted): 0.923519
+Recall (Weighted): 0.922570
+F1-Score (Weighted): 0.921376
+Waktu Training: 0.14 detik
 Model dilatih menggunakan parameter default.

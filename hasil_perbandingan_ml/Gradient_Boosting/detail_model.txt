@@ -1,7 +1,7 @@
 Nama Model: Gradient Boosting
-Akurasi: 0.997698
-Presisi (Weighted): 0.997698
-Recall (Weighted): 0.997698
-F1-Score (Weighted): 0.997698
-Waktu Training: 124.28 detik
+Akurasi: 0.979596
+Presisi (Weighted): 0.979747
+Recall (Weighted): 0.979596
+F1-Score (Weighted): 0.979559
+Waktu Training: 164.83 detik
 Hyperparameter Terbaik: {'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 100}

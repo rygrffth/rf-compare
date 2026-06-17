@@ -1,7 +1,7 @@
 Nama Model: Random Forest
-Akurasi: 0.998117
-Presisi (Weighted): 0.998125
-Recall (Weighted): 0.998117
-F1-Score (Weighted): 0.998117
-Waktu Training: 63.05 detik
-Hyperparameter Terbaik: {'max_depth': None, 'min_samples_leaf': 1, 'n_estimators': 100}
+Akurasi: 0.984305
+Presisi (Weighted): 0.984450
+Recall (Weighted): 0.984305
+F1-Score (Weighted): 0.984282
+Waktu Training: 188.37 detik
+Hyperparameter Terbaik: {'max_depth': None, 'min_samples_leaf': 1, 'n_estimators': 200}
