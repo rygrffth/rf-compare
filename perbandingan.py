@@ -22,7 +22,7 @@ from sklearn.exceptions import ConvergenceWarning
 warnings.filterwarnings("ignore", category=ConvergenceWarning)
 
 def main():
-    dataset_filename = 'dataset.csv'
+    dataset_filename = 'dataset_a.csv'
     output_folder = 'hasil_perbandingan_ml'
     
     os.makedirs(output_folder, exist_ok=True)

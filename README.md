@@ -31,8 +31,8 @@ pip install pandas numpy scikit-learn matplotlib seaborn tqdm
 
 ### 3. Persiapan Dataset
 Pastikan file-file dataset berikut berada di dalam folder yang sama dengan script Python:
-- `dataset.csv` — Dataset utama yang sudah diekstraksi fiturnya, digunakan untuk Skenario A
-- `dataset_urut.csv` — Dataset dengan urutan kronologis, digunakan untuk Skenario B
+- `dataset_a.csv` — Dataset utama yang sudah diekstraksi fiturnya, digunakan untuk Skenario A
+- `dataset_b.csv` — Dataset dengan urutan kronologis, digunakan untuk Skenario B
 
 ## Cara Menjalankan
 

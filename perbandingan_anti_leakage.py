@@ -81,7 +81,7 @@ def augment_dataset(df):
 
 def main():
     np.random.seed(42)
-    dataset_filename = 'dataset_urut.csv'
+    dataset_filename = 'dataset_b.csv'
     output_folder = 'hasil_perbandingan_anti_leakage'
     os.makedirs(output_folder, exist_ok=True)
 
