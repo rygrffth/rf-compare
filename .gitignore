@@ -1,3 +1,5 @@
 __pycache__/
 *.pyc
 .DS_Store
+buat_dataset_urut.py
+buat_dataset_lengkap_dengan_timestamp.py
